@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets de Citas - Aniversario 💖</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- ESTILOS GENERALES (DISEÑO UNIFICADO) --- */
+        :root {
+            --rosa-fuerte: #ff5c8a;
+            --rosa-claro: #ffcce6;
+            --naranja-pastel: #ffeadb;
+            --blanco: #ffffff;
+            --dorado: #ffd700;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, var(--naranja-pastel) 0%, var(--rosa-claro) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--rosa-fuerte);
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            margin: 40px 0 20px 0;
+            text-shadow: 3px 3px 0px white;
+            z-index: 10;
+        }
+
+        /* --- CUADRÍCULA DE TICKETS (ESTILO CD) --- */
+        .main-container {
+            width: 90%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .tickets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .ticket-card {
+            background: var(--blanco);
+            aspect-ratio: 1 / 1;
+            border-radius: 20px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(255, 92, 138, 0.2);
+            border: 6px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .ticket-card:hover {
+            transform: scale(1.05) translateY(-8px);
+            border-color: var(--rosa-fuerte);
+        }
+
+        .ticket-border {
+            border: 2px dashed var(--rosa-claro);
+            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .ticket-icon {
+            font-size: 3rem;
+            color: var(--rosa-fuerte);
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        /* --- DETALLE: ESTRELLITA DORADA --- */
+        .estrella-decor {
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            font-size: 1.5rem;
+            color: var(--dorado);
+            animation: glow 1.5s infinite ease-in-out;
+        }
+
+        @keyframes glow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.6; }
+        }
+
+        .ticket-card h3 {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .ticket-card p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* --- ESTADO SELECCIONADO --- */
+        .ticket-card.seleccionado {
+            background: var(--rosa-fuerte);
+            border-color: var(--rosa-fuerte);
+        }
+
+        .ticket-card.seleccionado .ticket-icon,
+        .ticket-card.seleccionado h3,
+        .ticket-card.seleccionado p {
+            color: white;
+        }
+
+        .ticket-card.seleccionado .ticket-border {
+            border-color: white;
+        }
+
+        /* --- PANEL DE DESEOS (ESTILO IMAGEN) --- */
+        .deseos-panel {
+            background: var(--blanco);
+            width: 100%;
+            max-width: 450px;
+            margin: 40px 0;
+            padding: 30px;
+            border-radius: 25px;
+            border: 4px dotted var(--rosa-fuerte);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .deseos-panel h3 {
+            font-size: 1.2rem;
+            color: var(--rosa-fuerte);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        #lista-deseos {
+            padding: 0;
+            list-style: none;
+        }
+
+        #lista-deseos li {
+            padding: 10px 0;
+            font-weight: 700;
+            color: #444;
+            border-bottom: 1px solid #fff0f5;
+            display: flex;
+            align-items: center;
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #lista-deseos li::before {
+            content: '✨';
+            margin-right: 12px;
+        }
+
+        /* --- BOTÓN FINAL --- */
+        .btn-final {
+            background: var(--rosa-fuerte);
+            color: white;
+            text-decoration: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.6rem;
+            margin-bottom: 60px;
+            transition: 0.4s;
+            box-shadow: 0 8px 25px rgba(255, 92, 138, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-final:hover {
+            transform: scale(1.1) rotate(-2deg);
+            background: #ff2b6d;
+        }
+
+        /* --- DECORACIÓN QUE CAE --- */
+        .decor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: caer linear infinite;
+        }
+
+        @keyframes caer {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>✨ Nuestros Próximos Planes ✨</h1>
+
+    <div class="main-container">
+        <div class="tickets-grid">
+            
+            <div class="ticket-card" data-title="Tarde de Pelis y Mimos">
+                <div class="ticket-border">
+                    <i class="fas fa-film ticket-icon"></i>
+                    <h3>TARDE DE PELIS</h3>
+                    <p>Tú eliges la peli, yo traigo las palomitas y abrazos.</p>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-title="Almuerzo Juntos">
+                <div class="ticket-border">
+                    <i class="fas fa-utensils ticket-icon"></i>
+                    <h3>ALMUERZO JUNTOS</h3>
+                    <p>Válido para una comida deliciosa donde tú decidas.</p>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-title="Masaje Relajante">
+                <div class="ticket-border">
+                    <i class="fas fa-spa ticket-icon"></i>
+                    <h3>MASAJE RELAJANTE</h3>
+                    <p>Un momento para ti, para quitarte todo el estrés.</p>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-title="Paseo Bajo las Estrellas">
+                <div class="ticket-border">
+                    <div class="ticket-icon">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-star estrella-decor"></i>
+                    </div>
+                    <h3>BAJO LAS ESTRELLAS</h3>
+                    <p>Una caminata tranquila para hablar de sueños.</p>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-title="Postre Juntos">
+                <div class="ticket-border">
+                    <i class="fas fa-birthday-cake ticket-icon"></i>
+                    <h3>POSTRE JUNTOS</h3>
+                    <p>Haremos magia en la cocina creando algo dulce.</p>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-title="Beso Infinito">
+                <div class="ticket-border">
+                    <i class="fas fa-kiss-wink-heart ticket-icon"></i>
+                    <h3>BESO INFINITO</h3>
+                    <p>Válido en cualquier momento, sin caducidad.</p>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-title="Aventura Juntos">
+                <div class="ticket-border">
+                    <i class="fas fa-map-location-dot ticket-icon"></i>
+                    <h3>AVENTURA JUNTOS</h3>
+                    <p>Válido para un día de exploración en un lugar nuevo.</p>
+                </div>
+            </div>
+
+            <div class="ticket-card" data-title="Día Especial para ti">
+                <div class="ticket-border">
+                    <i class="fas fa-crown ticket-icon"></i>
+                    <h3>DÍA ESPECIAL</h3>
+                    <p>Tú eliges todo por un día entero, yo obedezco.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="deseos-panel">
+            <h3>📝 DESEOS REGISTRADOS</h3>
+            <ul id="lista-deseos"></ul>
+        </div>
+
+        <a href="semifinal.html" class="btn-final">
+            Contador de tiempo✨
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tickets = document.querySelectorAll('.ticket-card');
+            const listaDeseos = document.getElementById('lista-deseos');
+
+            tickets.forEach(ticket => {
+                ticket.addEventListener('click', () => {
+                    ticket.classList.toggle('seleccionado');
+                    actualizarLista();
+                });
+            });
+
+            function actualizarLista() {
+                listaDeseos.innerHTML = '';
+                const seleccionados = document.querySelectorAll('.ticket-card.seleccionado');
+                seleccionados.forEach(t => {
+                    const li = document.createElement('li');
+                    li.innerText = `Plan: ${t.dataset.title}`;
+                    listaDeseos.appendChild(li);
+                });
+            }
+
+            function crearLluvia() {
+                const iconos = ['🌸', '✨', '💖', '🎀'];
+                setInterval(() => {
+                    const decor = document.createElement('div');
+                    decor.className = 'decor';
+                    decor.innerHTML = iconos[Math.floor(Math.random() * iconos.length)];
+                    decor.style.left = Math.random() * 100 + "vw";
+                    decor.style.top = "-50px";
+                    decor.style.fontSize = (Math.random() * 20 + 15) + "px";
+                    decor.style.color = "#ff5c8a";
+                    decor.style.animationDuration = (Math.random() * 3 + 3) + "s";
+                    document.body.appendChild(decor);
+                    setTimeout(() => decor.remove(), 5000);
+                }, 400);
+            }
+            crearLluvia();
+        });
+    </script>
+</body>
+</html>

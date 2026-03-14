@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Nuestra Eternidad ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-magico: #ff4d8d;
+            --rosa-pastel: #ffb3d1;
+            --blanco-puro: #ffffff;
+            --glow-titulo: 0 0 30px rgba(255, 77, 141, 0.8), 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Quicksand', sans-serif;
+            background: radial-gradient(circle, #fff0f6 0%, #ffcce6 100%);
+            overflow-x: hidden;
+        }
+
+        /* --- ESTRUCTURA DE DOS COLUMNAS --- */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .texto-hero {
+            flex: 1;
+            text-align: left;
+            position: relative;
+        }
+
+        /* --- MARCO DE RELIEVE PARA EL TÍTULO --- */
+        .marco-titulo {
+            position: absolute;
+            top: -20px;
+            left: -30px;
+            width: 110%;
+            height: 120%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 40px;
+            z-index: -1;
+            box-shadow: inset 0 0 20px rgba(255, 77, 141, 0.2), 10px 10px 30px rgba(0,0,0,0.05);
+            border: 2px solid white;
+        }
+
+        /* --- IMÁGENES (SIN BORDES NI FONDOS) --- */
+        .media {
+            flex: 1;
+            max-width: 500px;
+            height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .media img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* --- LLUVIA SUTIL (Solo 4 tipos y rosados) --- */
+        .flower-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .flor {
+            position: absolute;
+            top: -50px;
+            animation: fall linear infinite;
+            filter: drop-shadow(0 0 5px white);
+            user-select: none;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- SECCIONES --- */
+        .seccion {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            transition: all 0.8s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hidden { display: none !important; }
+
+        /* --- TEXTOS PRINCIPALES --- */
+        .big-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--rosa-magico);
+            text-shadow: 3px 3px 0px white, var(--glow-titulo);
+            margin: 0;
+            line-height: 1.1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .btn-entrar {
+            background: linear-gradient(45deg, var(--rosa-magico), #ff85b2);
+            color: white;
+            border: 3px solid white;
+            padding: 20px 50px;
+            font-size: 1.6rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 77, 141, 0.4);
+            font-family: 'Pacifico', cursive;
+            transition: 0.3s;
+            margin-top: 30px;
+        }
+
+        .btn-entrar:hover { transform: scale(1.1); }
+
+        /* --- POEMA MÁS ANGOSTO --- */
+        .poema-texto-col {
+            flex: 0.8; /* Más angosto */
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 50px;
+            border: 8px double var(--rosa-magico);
+            box-shadow: 0 20px 50px rgba(255, 77, 141, 0.3);
+            position: relative;
+        }
+
+        .poema-texto {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            line-height: 1.4;
+            color: #444;
+        }
+
+        /* --- LOGIN (SIN CAMBIOS) --- */
+        .login-box {
+            background: white;
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 25px 80px rgba(255, 77, 141, 0.4);
+            border: 4px solid var(--rosa-pastel);
+            text-align: center;
+        }
+
+        .input-pass {
+            padding: 18px;
+            border: 3px solid var(--rosa-pastel);
+            border-radius: 20px;
+            width: 250px;
+            font-size: 1.5rem;
+            text-align: center;
+            color: var(--rosa-magico);
+            font-weight: bold;
+            letter-spacing: 5px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @media (max-width: 900px) {
+            .hero-container { flex-direction: column; text-align: center; }
+            .marco-titulo { width: 100%; left: 0; }
+            .media { height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flower-container" id="flowerContainer"></div>
+
+    <div id="paso1" class="seccion">
+        <div class="hero-container">
+            <div class="texto-hero">
+                <div class="marco-titulo"></div> <h1 class="big-title">¡Feliz Aniversario,<br>Mi Vida! ❤️</h1>
+                <p style="font-size: 1.5rem; color: #ff4d8d; font-weight: bold; margin-top: 20px;">
+                    Eres el sueño del que nunca<br>quiero despertar...
+                </p>
+                <button class="btn-entrar" onclick="cambiarPaso(1, 2)">Entrar a mi corazón 💖</button>
+            </div>
+            <div class="media">
+                <img src="cancion/oo.png" alt="25">
+            </div>
+        </div>
+    </div>
+
+    <div id="paso2" class="seccion hidden">
+        <div class="hero-container">
+            <div class="poema-texto-col">
+                <div class="marco-titulo" style="height: 100px; top: -10px;"></div>
+                <h2 style="font-family: 'Pacifico'; color: var(--rosa-magico); font-size: 2.5rem; margin: 0 0 20px 0;">Mi Trato Contigo...</h2>
+                <div class="poema-texto">
+                    "Mi táctica es mirarte, aprender como sos,<br>
+                    quererte como sos. Mi táctica es hablarte<br>
+                    y escucharte, construir con palabras<br>
+                    un puente indestructible.<br><br>
+                    <b>Mi estrategia es que un día cualquiera</b>,<br>
+                    no sé cómo ni sé con qué pretexto,<br>
+                    <b>por fin me necesites</b>."<br>
+                    <small style="font-size: 1.2rem; color: #888;">— Mario Benedetti</small>
+                </div>
+                <button class="btn-entrar" style="font-size: 1.3rem; padding: 15px 40px;" onclick="cambiarPaso(2, 3)">Continuar ✨</button>
+            </div>
+            <div class="media">
+                <img src="cancion/teamo.png" alt="25">
+            </div>
+        </div>
+    </div>
+
+    <div id="paso3" class="seccion hidden">
+        <div class="login-box">
+            <h2 style="color: var(--rosa-magico); font-family: 'Pacifico'; font-size: 2.2rem;">Nuestra Llave Sagrada</h2>
+            <p style="font-size: 1.1rem; color: #666;">Introduce nuestra fecha especial para entrar...</p>
+            <div style="display: flex; align-items: center; justify-content: center; margin-top: 25px;">
+                <input type="password" id="pass" class="input-pass" placeholder="******" maxlength="6">
+                <button style="background:none; border:none; font-size: 2.5rem; cursor:pointer;" onclick="mostrarPista()">🔑</button>
+            </div>
+            <p id="pistaTexto" style="color: var(--rosa-magico); font-weight: bold; margin-top: 15px; display: none;">🌸 Pista: Es el día que nuestra historia comenzó (DDMMAA)</p>
+            <p id="errorMsg" style="color: #ff0044; display: none; margin-top: 15px; font-weight: bold;">Esa no es la fecha, mi amor... ¡Piensa un poquito! 🥺</p>
+            <br>
+            <button class="btn-entrar" onclick="verificarPass()">Desbloquear Aniversario 💕</button>
+        </div>
+    </div>
+
+    <script>
+        function cambiarPaso(actual, siguiente) {
+            document.getElementById('paso' + actual).classList.add('hidden');
+            document.getElementById('paso' + siguiente).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function mostrarPista() { document.getElementById('pistaTexto').style.display = 'block'; }
+
+        function verificarPass() {
+            const pass = document.getElementById('pass').value;
+            if(pass === "140325") { window.location.href = "inicio.html"; } 
+            else { document.getElementById('errorMsg').style.display = 'block'; }
+        }
+
+        function crearLluvia() {
+            const container = document.getElementById('flowerContainer');
+            const tipos = ['🌸', '💕', '🌷', '✨']; // Solo 4 tipos rosados
+            setInterval(() => {
+                const f = document.createElement('div');
+                f.className = 'flor';
+                f.innerHTML = tipos[Math.floor(Math.random() * tipos.length)];
+                f.style.left = Math.random() * 100 + "vw";
+                f.style.fontSize = (Math.random() * 15 + 20) + "px";
+                f.style.animationDuration = (Math.random() * 3 + 4) + "s";
+                container.appendChild(f);
+                setTimeout(() => f.remove(), 6000);
+            }, 400); // Menos frecuencia para que sea sutil
+        }
+        crearLluvia();
+    </script>
+</body>
+</html>

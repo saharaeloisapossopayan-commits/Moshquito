@@ -1,0 +1,155 @@
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(180deg, #fff0f8 0%, #ffe6f2 50%, #ffd1e8 100%);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* 🌸 FLORES (MANTENIDAS) */
+.flor {
+  position: fixed;
+  top: -10%;
+  color: rgba(255,140,190,.45);
+  animation: caer 14s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+@keyframes caer {
+  0% { top: -10%; opacity: 0; transform: rotate(0deg); }
+  10% { opacity: 1; }
+  100% { top: 110%; opacity: 0; transform: rotate(360deg); }
+}
+
+/* TÍTULOS MÁS LINDOS */
+h1 {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 3.5rem;
+  color: #ff5c8a;
+  margin: 60px 0 10px;
+  text-shadow: 3px 3px 0px #fff;
+}
+
+.subtitulo {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #c94f7c;
+  margin-bottom: 80px;
+  font-style: italic;
+}
+
+/* GALERÍA POMPOSA */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px 40px;
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* TARJETAS TIPO POLAROID ALARGADA */
+.tarjeta, .tarjeta-video {
+  background: #ffffff;
+  padding: 15px 15px 40px 15px; /* Estilo Polaroid: espacio abajo */
+  border-radius: 4px; /* Las polaroids son más rectas, pero con un toque redondeado */
+  box-shadow: 0 15px 35px rgba(255, 140, 190, 0.4);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ffe6f2;
+}
+
+/* EFECTO DE BRILLO (GLITTER) AL PASAR EL RATÓN */
+.tarjeta:hover, .tarjeta-video:hover {
+  transform: translateY(-15px) rotate(2deg);
+  box-shadow: 0 25px 50px rgba(255, 92, 138, 0.5);
+}
+
+.tarjeta::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(45deg);
+  transition: 0.7s;
+  pointer-events: none;
+}
+
+.tarjeta:hover::before {
+  left: 100%;
+}
+
+/* 📱 CUADROS TIPO CELULAR (9:16) */
+.media {
+  width: 100%;
+  aspect-ratio: 9 / 16; /* Proporción de celular */
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ffd1e8, #ffe9f3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff5c8a;
+  font-weight: 600;
+  border: 2px solid #fff0f8;
+  overflow: hidden;
+}
+
+/* TEXTO CON FUENTE CURSIVA Y LINDAS FRASES */
+.texto {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  color: #7d435a;
+  line-height: 1.4;
+  text-align: center;
+  padding: 0 10px;
+  margin-top: 15px;
+}
+
+.texto b {
+  color: #ff5c8a;
+  display: block;
+  margin-top: 5px;
+  font-size: 0.85rem;
+}
+
+/* BOTÓN FINAL */
+.contenedor-boton {
+  margin: 100px 0 120px;
+  text-align: center;
+}
+
+.boton-amor {
+  background: linear-gradient(135deg, #ff80b3, #ffb6d9);
+  border: none;
+  border-radius: 50px;
+  padding: 20px 60px;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 15px 35px rgba(255, 128, 179, 0.4);
+  transition: all 0.3s ease;
+  border: 3px solid #fff;
+}
+
+.boton-amor:hover {
+  transform: scale(1.15) rotate(-2deg);
+  background: linear-gradient(135deg, #ff5c8a, #ff9acb);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .galeria {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 El Corazón de Nuestro Universo 🌌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-ultra: #ff007f;
+            --rosa-brillo: #ff66b2;
+            --oro: #ffd700;
+            --espacio: #020205;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background: var(--espacio); color: white;
+            font-family: 'Quicksand', sans-serif; overflow: hidden;
+        }
+
+        /* FONDO GALÁCTICO */
+        #universo {
+            position: fixed; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+            z-index: 1;
+        }
+
+        .nebulosa {
+            position: absolute; width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 0, 127, 0.25) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 20%, rgba(0, 212, 255, 0.15) 0%, transparent 40%);
+            filter: blur(70px); animation: move 12s infinite alternate;
+        }
+
+        @keyframes move { from { transform: scale(1); } to { transform: scale(1.3); } }
+
+        /* CONSTELACIÓN */
+        .svg-container { position: absolute; width: 100%; height: 100%; z-index: 5; }
+        
+        .estrella {
+            cursor: pointer; transition: 0.2s;
+            filter: drop-shadow(0 0 10px var(--oro));
+            user-select: none;
+        }
+        /* Eliminado el movimiento exagerado en hover */
+        .estrella:hover { filter: drop-shadow(0 0 15px white); }
+
+        /* CAMINO ROSA ULTRA BRILLANTE */
+        .linea { stroke: rgba(255, 255, 255, 0.05); stroke-width: 1.5; }
+        .linea-activa { 
+            stroke: var(--rosa-ultra); 
+            stroke-width: 7; /* Más grueso */
+            filter: drop-shadow(0 0 20px var(--rosa-ultra)) drop-shadow(0 0 10px white);
+            animation: hyper-glow 0.8s infinite alternate; 
+        }
+
+        @keyframes hyper-glow { 
+            from { opacity: 0.8; filter: drop-shadow(0 0 15px var(--rosa-ultra)); } 
+            to { opacity: 1; filter: drop-shadow(0 0 35px var(--rosa-ultra)); } 
+        }
+
+        /* CUADROS Y MODALES */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
+            display: none; align-items: center; justify-content: center; z-index: 100;
+        }
+
+        .cuadro-tierno {
+            background: rgba(255, 255, 255, 0.98); color: #333;
+            padding: 40px; border-radius: 50px; max-width: 450px; width: 85%;
+            text-align: center; border: 4px solid var(--rosa-ultra);
+            box-shadow: 0 0 50px rgba(255, 0, 127, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn { from { transform: scale(0.5); opacity: 0; } }
+
+        .btn-magico {
+            background: linear-gradient(45deg, var(--rosa-ultra), #ff85b2);
+            color: white; border: none; padding: 15px 35px; border-radius: 40px;
+            cursor: pointer; font-family: 'Pacifico'; font-size: 1.1rem; margin-top: 20px;
+            transition: 0.2s;
+        }
+        .btn-magico:hover { transform: scale(1.05); }
+
+        /* TARJETA FINAL */
+        #final-card {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); z-index: 200;
+            background: white; color: #333; padding: 50px;
+            border-radius: 60px; border: 10px double var(--rosa-ultra);
+            width: 85%; max-width: 650px; text-align: center;
+            box-shadow: 0 0 150px rgba(255, 0, 127, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="universo">
+        <div class="nebulosa"></div>
+    </div>
+
+    <div style="position: absolute; z-index: 10; width: 100%; text-align: center; top: 30px;">
+        <h1 style="font-family: 'Pacifico'; color: var(--oro); font-size: 2.8rem; text-shadow: 0 0 15px var(--oro); margin: 0;">
+            El Destino de Nuestro Corazón ✨
+        </h1>
+    </div>
+
+    <svg class="svg-container" viewBox="0 0 800 600">
+        <g id="lineas"></g>
+        <text id="e1" x="400" y="250" class="estrella" font-size="35" onclick="lanzarTarea(1)">⭐</text>
+        <text id="e2" x="300" y="180" class="estrella" font-size="35" onclick="lanzarTarea(2)">⭐</text>
+        <text id="e3" x="200" y="220" class="estrella" font-size="35" onclick="lanzarTarea(3)">⭐</text>
+        <text id="e4" x="200" y="350" class="estrella" font-size="35" onclick="lanzarTarea(4)">⭐</text>
+        <text id="e5" x="300" y="480" class="estrella" font-size="35" onclick="lanzarTarea(5)">⭐</text>
+        <text id="e6" x="400" y="550" class="estrella" font-size="35" onclick="lanzarTarea(6)">⭐</text>
+        <text id="e7" x="500" y="480" class="estrella" font-size="35" onclick="lanzarTarea(7)">⭐</text>
+        <text id="e8" x="600" y="350" class="estrella" font-size="35" onclick="lanzarTarea(8)">⭐</text>
+        <text id="e9" x="600" y="220" class="estrella" font-size="35" onclick="lanzarTarea(9)">⭐</text>
+        <text id="e10" x="500" y="180" class="estrella" font-size="35" onclick="lanzarTarea(10)">⭐</text>
+    </svg>
+
+    <div class="overlay" id="modal">
+        <div class="cuadro-tierno" id="box"></div>
+    </div>
+
+    <div id="final-card">
+        <h2 style="font-family: 'Pacifico'; color: var(--rosa-ultra); font-size: 2rem;">Gracias por existir... ❤️</h2>
+        <p id="texto-final" style="font-size: 1.25rem; line-height: 1.8; color: #222; font-family: 'Quicksand'; font-weight: 700; text-align: justify;"></p>
+        <br>
+        <button class="btn-magico" onclick="window.location.href='pagina.html'">Nuestro infinito empieza aquí 🌸</button>
+    </div>
+
+    <script>
+        let paso = 1;
+        const info = [
+            { q: "¿Cuál es tu apodo favorito que te digo y por qué?", r: "Escuchar ese nombre en tu voz es mi recordatorio favorito de que estoy en casa." },
+            { q: "Abre este sobre imaginario 💌: ¿Qué es lo primero que pensaste al verme?", r: "Aquel primer pensamiento fue el inicio del viaje más hermoso de mi vida." },
+            { q: "Dime el nombre de la canción más profunda de nuestra lista...", r: "Esa melodía guarda el secreto de todo lo que las palabras no alcanzan a decir." },
+            { q: "Describe el día que nos vimos en 2025 por primera vez...", r: "Ese día el universo conspiró a nuestro favor. Ese beso... lo cambió todo. 💋" },
+            { q: "De todos nuestros momentos, ¿cuál guardarías en una cápsula del tiempo?", r: "Cada segundo a tu lado es un tesoro que protegería para siempre." },
+            { q: "¿En qué te inspiraste para la pintura que me hiciste con mi nombre?", r: "Tu arte es la forma más pura de ver tu alma, y me siento afortunada de ser parte de ella." },
+            { q: "Selecciona nuestro emoji: 🐱, 🐻, 💕 o ✨?", r: "Un pequeño símbolo que encierra un universo de complicidad." },
+            { q: "¿Qué es lo que más te hace reír de nosotros?", r: "Nuestras risas son el sonido que elegiría escuchar por el resto de la eternidad." },
+            { q: "Si pudieras viajar a cualquier lugar conmigo mañana, ¿a dónde irías?", r: "No importa el destino, siempre que mi mano esté entrelazada con la tuya." },
+            { q: "La última estrella: Escribe una promesa para nuestro futuro.", r: "Esa promesa ya brilla con luz propia en nuestro propio cielo. ¡Lo lograste!" }
+        ];
+
+        function lanzarTarea(n) {
+            if (n !== paso) return alert("Sigue el camino de las estrellas en orden... ✨");
+            const modal = document.getElementById('modal');
+            const box = document.getElementById('box');
+            box.innerHTML = `
+                <h2 style="font-family: 'Pacifico'; color: var(--rosa-ultra);">Estrella ${n}</h2>
+                <p style="font-size: 1.1rem; font-weight: bold;">${info[n-1].q}</p>
+                <textarea id="val" placeholder="Escribe desde el fondo de tu alma..." style="width:90%; height:80px; padding:10px; border-radius:15px; border:2px solid #ffb3d1; font-family: 'Quicksand'; font-weight: 600;"></textarea>
+                <br><button class="btn-magico" onclick="mostrarMensajeLindo(${n})">Confirmar estrella ✨</button>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        function mostrarMensajeLindo(n) {
+            const box = document.getElementById('box');
+            box.innerHTML = `
+                <h2 style="font-family: 'Pacifico'; color: var(--rosa-ultra);">¡Brillante!</h2>
+                <p style="font-size: 1.1rem; font-weight: 700; padding: 10px; color: #444;">${info[n-1].r}</p>
+                <button class="btn-magico" onclick="continuar(${n})">Seguir el camino 🚀</button>
+            `;
+        }
+
+        function continuar(n) {
+            document.getElementById('modal').style.display = 'none';
+            dibujarLinea(n);
+            paso++;
+            if (paso > 10) {
+                dibujarLinea(10); // Cierra el corazón
+                setTimeout(mostrarFinal, 1200);
+            }
+        }
+
+        function dibujarLinea(n) {
+            const eActual = document.getElementById('e' + n);
+            let nSig = n + 1;
+            if (n === 10) nSig = 1;
+            const eSig = document.getElementById('e' + nSig);
+            
+            const lineas = document.getElementById('lineas');
+            const l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            l.setAttribute("x1", eActual.getAttribute("x"));
+            l.setAttribute("y1", parseInt(eActual.getAttribute("y")) - 10);
+            l.setAttribute("x2", eSig.getAttribute("x"));
+            l.setAttribute("y2", parseInt(eSig.getAttribute("y")) - 10);
+            l.setAttribute("class", "linea linea-activa");
+            lineas.appendChild(l);
+        }
+
+        function mostrarFinal() {
+            const finalCard = document.getElementById('final-card');
+            const texto = "Gracias por recorrer este camino conmigo, no solo en esta página, sino en cada día de nuestra vida. El 14 de Marzo de 2025 las estrellas no solo se alinearon, sino que se rindieron ante nosotros para darnos el regalo más grande: encontrarnos. Eres mi refugio mas calido en la tormenta, mi paz en el caos y el dueño absoluto de cada latido de mi corazón. Este enigma que resolviste es solo una mínima parte de lo que significas para mí; quiero que sepas que, sin importar lo que el futuro nos depare, siempre encontraré la forma de hacerte sentir amado. Te amo más allá del tiempo, más allá de la distancia y mucho más allá del infinito. Eres mi para siempre.";
+            finalCard.style.display = 'block';
+            
+            let i = 0;
+            function escribir() {
+                if (i < texto.length) {
+                    document.getElementById('texto-final').innerHTML += texto.charAt(i);
+                    i++; setTimeout(escribir, 55);
+                }
+            }
+            escribir();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Razones de Mi Amor Infinito 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-fuerte: #ff4d8d;
+            --rosa-brillante: #ff85b2;
+            --rosa-claro: #ffb6c1;
+            --rosa-pastel: #fff0f5;
+            --blanco-cristal: rgba(255, 255, 255, 0.3);
+            --sombra-amor: rgba(255, 77, 141, 0.4);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100vh;
+            overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
+            background: radial-gradient(circle, #fff5f8 0%, #ffe4ec 100%);
+        }
+
+        /* --- FONDO DECORATIVO --- */
+        #capa-decorativa { position: fixed; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .flor-fondo { position: absolute; top: -100px; opacity: 0.4; z-index: 2; animation: lluvia-lenta linear forwards; }
+        @keyframes lluvia-lenta { to { transform: translateY(110vh) rotate(360deg); } }
+
+        /* --- CONTADOR --- */
+        .contador-contenedor {
+            position: fixed; top: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px var(--sombra-amor);
+            font-family: 'Pacifico', cursive;
+            display: flex; flex-direction: column; align-items: center; z-index: 100;
+        }
+        .barra-progreso { width: 150px; height: 12px; background: #eee; border-radius: 10px; margin-top: 8px; overflow: hidden; }
+        #progresoBarra { width: 0%; height: 100%; background: var(--rosa-fuerte); transition: 0.5s; }
+
+        /* --- INTERFAZ FRASCO --- */
+        .contenedor-magico {
+            position: relative; z-index: 10;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100vh; width: 100%; transition: opacity 1s;
+        }
+        .escena-frasco { position: relative; width: 320px; height: 420px; perspective: 1000px; }
+        .frasco-cristal {
+            width: 100%; height: 100%; background: var(--blanco-cristal);
+            border: 6px solid #fff; border-radius: 60px 60px 130px 130px;
+            position: relative; backdrop-filter: blur(12px);
+            box-shadow: 0 40px 80px var(--sombra-amor), inset 0 0 60px rgba(255, 255, 255, 0.8);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .tapa { position: absolute; top: -45px; left: 50%; transform: translateX(-50%); width: 210px; height: 55px; background: var(--rosa-fuerte); border: 4px solid #fff; border-radius: 20px; z-index: 5; }
+        .etiqueta { background: #fff; padding: 25px; border: 3px dashed var(--rosa-fuerte); border-radius: 10px; font-family: 'Pacifico', cursive; color: var(--rosa-fuerte); text-align: center; transform: rotate(-2deg); font-size: 1.8rem; }
+
+        /* --- BOTONES Y SOBRE --- */
+        .btn-agitar {
+            margin-top: 60px; padding: 22px 80px;
+            background: linear-gradient(45deg, var(--rosa-fuerte), var(--rosa-brillante));
+            color: white; border: none; border-radius: 60px;
+            font-family: 'Dancing Script', cursive; font-size: 2.8rem;
+            cursor: pointer; box-shadow: 0 15px 40px var(--sombra-amor);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-agitar:hover { transform: scale(1.1) translateY(-10px); }
+        .shake-frasco { animation: shaking 0.1s infinite; }
+        @keyframes shaking { 0%, 100% { transform: translate(0,0); } 25% { transform: translate(10px,10px); } 75% { transform: translate(-10px,-5px); } }
+
+        .sobre-animado { position: absolute; display: none; font-size: 6rem; cursor: pointer; z-index: 100; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2)); }
+        .volar-lado { display: block; animation: trayectoriaLateral 1.5s forwards ease-in-out; }
+        @keyframes trayectoriaLateral {
+            0% { transform: scale(0) translate(0, 0); opacity: 0; }
+            60% { transform: scale(1.7) translate(280px, -220px) rotate(360deg); }
+            100% { transform: scale(1.5) translate(250px, -180px) rotate(360deg); }
+        }
+
+        /* --- MODAL CARTA --- */
+        .modal-carta {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 182, 193, 0.2); backdrop-filter: blur(15px);
+            z-index: 200; justify-content: center; align-items: center;
+        }
+        .hoja-tierna {
+            background: #fff; width: 90%; max-width: 420px; padding: 50px;
+            border-radius: 40px; box-shadow: 0 40px 100px var(--sombra-amor);
+            text-align: center; border: 2px solid var(--rosa-pastel); animation: brotar 0.5s ease-out;
+        }
+        @keyframes brotar { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* --- GRAN FINAL --- */
+        .gran-final {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #fff 0%, #ffb6c1 100%);
+            z-index: 1000; flex-direction: column; align-items: center; justify-content: center;
+            animation: fadeIn 2s forwards;
+        }
+        .foto-polaroid {
+            background: white; padding: 20px 20px 60px 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2); transform: rotate(-3deg);
+            border-radius: 5px; max-width: 350px; margin-bottom: 20px;
+        }
+        .foto-polaroid img { width: 100%; height: 350px; object-fit: cover; }
+        .dedicatoria { font-family: 'Dancing Script', cursive; text-align: center; font-size: 1.5rem; color: #444; }
+        .mariposa { position: fixed; font-size: 2.5rem; pointer-events: none; z-index: 1001; animation: volarM 6s linear infinite; }
+        @keyframes volarM { 0% { transform: translate(-10vw, 100vh); } 100% { transform: translate(110vw, -10vh) rotate(360deg); } }
+        
+        .btn-siguiente {
+            padding: 15px 40px; background: var(--rosa-fuerte); color: white;
+            text-decoration: none; border-radius: 50px; font-family: 'Pacifico';
+            box-shadow: 0 10px 20px var(--sombra-amor); animation: latido 2s infinite;
+        }
+        @keyframes latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    </style>
+</head>
+<body>
+
+    <div id="capa-decorativa"></div>
+
+    <div class="contador-contenedor">
+        <span id="contadorTexto">0 / 100 Razones</span>
+        <div class="barra-progreso"><div id="progresoBarra"></div></div>
+    </div>
+
+    <div class="contenedor-magico" id="interfazPrincipal">
+        <div class="escena-frasco">
+            <div class="frasco-cristal" id="frascoMaster">
+                <div class="tapa"></div>
+                <div class="etiqueta">100 Razones <br> de Mi Amor</div>
+            </div>
+            <div class="sobre-animado" id="sobreV" onclick="abrirCarta()">✉️</div>
+        </div>
+        <button class="btn-agitar" id="btnAccion" onclick="agitar()">Agitar con Amor ✨</button>
+    </div>
+
+    <div class="modal-carta" id="modalC">
+        <div class="hoja-tierna">
+            <div style="font-size: 3rem;">🌸</div>
+            <p id="textoR" style="font-size: 1.6rem; font-style: italic; margin: 20px 0; font-weight: 700;"></p>
+            <button onclick="cerrarCarta()" style="background:var(--rosa-fuerte); color:white; border:none; padding:10px 30px; border-radius:30px; font-family:'Pacifico'; cursor:pointer;">Guardar en el corazón ❤️</button>
+        </div>
+    </div>
+
+    <div class="gran-final" id="pantallaFinal">
+        <div class="foto-polaroid">
+            <img src="foto_aniversario.jpg" alt="Nuestro Amor">
+            <div class="dedicatoria">
+                <h2>¡Eres Mi Vida Entera! 💖</h2>
+                <p>Porque amarte es la razón de mi felicidad.</p>
+            </div>
+        </div>
+        <a href="tickets.html" class="btn-siguiente">Tickets de citas ➔</a>
+    </div>
+
+    <script>
+        const razones = [
+            "Amo cómo tu risa tiene el poder de iluminar hasta mi día más oscuro.",
+            "Porque en tus abrazos he encontrado el único lugar donde me siento totalmente a salvo.",
+            "Amo que me conozcas mejor que nadie y aun así decidas quedarte cada día.",
+            "Porque tu bondad no conoce límites y eso me hace admirarte profundamente.",
+            "Amo la manera en que tus ojos brillan cuando hablas de algo que te apasiona.",
+            "Porque me has enseñado que el amor verdadero se trata de ser un equipo.",
+            "Amo que con solo una mirada podamos entendernos sin decir una sola palabra.",
+            "Porque tu paciencia es el bálsamo que calma todas mis tormentas internas.",
+            "Amo la seguridad que me das para perseguir mis sueños más locos.",
+            "Porque eres la primera persona en la que pienso cuando tengo una buena noticia.",
+            "Amo cómo respetas mis silencios y celebras mis alegrías.",
+            "Porque estar a tu lado me hace querer ser una mejor versión de mí.",
+            "Amo la calidez de tu mano entrelazada con la mía mientras caminamos.",
+            "Porque haces que los momentos más simples se sientan como grandes aventuras.",
+            "Amo que seas mi cómplice en cada locura y mi refugio en cada tristeza.",
+            "Porque tu lealtad es un regalo que valoro más que cualquier cosa material.",
+            "Amo que creas en mí incluso en esos días en los que yo no puedo hacerlo.",
+            "Porque tu olor es mi fragancia favorita y me hace sentir en casa.",
+            "Amo cómo transformas los problemas en soluciones con solo una sonrisa.",
+            "Porque nuestra conexión se siente como si nuestras almas se conocieran de siempre.",
+            "Amo que seas la última persona con la que quiero hablar antes de dormir.",
+            "Porque tu apoyo incondicional me da las alas que necesito para volar.",
+            "Amo la forma en que cuidas de los detalles que nadie más nota.",
+            "Porque me haces reír de forma genuina, de esas veces que duele la panza.",
+            "Amo que no tengas miedo de mostrarme tu vulnerabilidad.",
+            "Porque amo la vida que estamos construyendo, un ladrillo a la vez.",
+            "Amo que seas mi paz en un mundo lleno de caos.",
+            "Porque tus besos todavía me dan mariposas como el primer día.",
+            "Amo que seas mi persona favorita para no hacer absolutamente nada.",
+            "Porque amo la forma en que me miras cuando crees que no me doy cuenta.",
+            "Amo tu fuerza interior, me enseñas a ser valiente cada día.",
+            "Porque me haces sentir que soy suficiente, exactamente como soy.",
+            "Amo que compartamos sueños, miedos y un futuro entero.",
+            "Porque tu voz es el sonido más reconfortante que conozco.",
+            "Amo que siempre encuentres la manera de hacerme sentir especial.",
+            "Porque eres mi hogar, mi norte y mi mayor bendición.",
+            "Amo que elijamos nuestro amor todos los días, sin dudar.",
+            "Porque cada segundo a tu lado vale más que mil años sin ti.",
+            "Amo que seas mi mayor apoyo y mi crítico más constructivo.",
+            "Porque tu inteligencia y tu ingenio me fascinan constantemente.",
+            "Amo que nuestro amor sea real, con sus altos y sus bajos, pero siempre fuerte.",
+            "Porque me haces sentir amado de una manera que nunca creí posible.",
+            "Amo la forma en que tu nariz se arruga cuando te ríes de verdad.",
+            "Porque tienes el corazón más grande y hermoso que he conocido.",
+            "Amo que seas el refugio donde siempre puedo ser yo mismo.",
+            "Porque nuestra historia es mi favorita de todos los libros del mundo.",
+            "Amo que tengamos nuestros propios chistes internos y lenguaje secreto.",
+            "Porque transformas un martes cualquiera en el mejor día de mi vida.",
+            "Amo la determinación con la que enfrentas tus metas.",
+            "Porque me das la libertad de ser libre y aun así querer volver a ti.",
+            "Amo que seas mi calma en medio de cualquier tormenta.",
+            "Porque no solo amo quien eres, sino quien soy cuando estoy contigo.",
+            "Amo la suavidad de tu piel y el calor que emanas.",
+            "Porque me haces ver la belleza en las cosas más pequeñas.",
+            "Amo que seas la primera persona que pienso al despertar .",
+            "Porque tu amor es el ancla que me mantiene firme.",
+            "Amo que seas tan genuino y auténtico en un mundo de apariencias.",
+            "Porque cada promesa tuya es una verdad absoluta para mí.",
+            "Amo la forma en que te preocupas por las personas que amas.",
+            "Porque eres mi mayor inspiración y mi mejor ejemplo.",
+            "Amo que juntos hayamos creado nuestro propio universo.",
+            "Porque con solo un abrazo tuyo, el mundo deja de pesar.",
+            "Amo que seamos capaces de hablar de todo y de nada por horas.",
+            "Porque tu sola presencia hace que todo valga la pena.",
+            "Amo cómo cuidas de mí incluso cuando yo olvido cuidarme.",
+            "Porque eres mi equilibrio perfecto.",
+            "Amo que me dejes entrar en tus pensamientos más profundos.",
+            "Porque tu sentido del humor es la chispa de mi vida.",
+            "Amo la pasión que le pones a cada cosa que haces.",
+            "Porque eres el regalo más bonito que la vida me ha dado.",
+            "Amo que me hagas sentir seguro de nuestro futuro juntos.",
+            "Porque cada día encuentro una nueva razón para enamorarme más.",
+            "Amo cómo me retas a crecer y a no estancarme.",
+            "Porque eres mi cómplice en cada pequeña aventura.",
+            "Amo la paz que transmites con solo estar cerca.",
+            "Porque eres el sueño del que nunca quiero despertar.",
+            "Amo que seamos dos almas bailando al mismo ritmo.",
+            "Porque tu amor es la fuerza que me impulsa a seguir adelante.",
+            "Amo que seas mi destino favorito.",
+            "Porque tienes una luz que nadie puede apagar.",
+            "Amo que sepas cómo hacerme sonreír incluso cuando tengo ganas de llorar.",
+            "Porque tu lealtad es inquebrantable.",
+            "Amo que me enseñes algo nuevo todos los días.",
+            "Porque nuestro amor es mi refugio más seguro.",
+            "Amo que seas tú, simplemente tú.",
+            "Porque no imagino un solo día de mi futuro sin tu presencia.",
+            "Amo cómo nuestras piezas encajan perfectamente.",
+            "Porque eres mi mayor alegría.",
+            "Amo la forma en que me haces sentir que nada es imposible.",
+            "Porque tu amor es el ingrediente secreto de mi felicidad.",
+            "Amo que seas la persona que quiero ver al despertar cada mañana.",
+            "Porque eres mi mayor tesoro.",
+            "Amo que nuestro amor crezca y se fortalezca con cada desafío.",
+            "Porque me has dado los recuerdos más hermosos de mi vida.",
+            "Amo que seas mi familia, mi equipo y mi todo.",
+            "Porque amarte es lo mejor que me ha pasado nunca.",
+            "Amo que estemos escribiendo este camino juntos.",
+            "Porque eres el latido constante de mi corazón.",
+            "Amo que nuestro amor sea eterno en cada pequeño detalle.",
+            "Porque te amo más de lo que las palabras pueden expresar."
+        ];
+
+        let contador = 0;
+        const total = 100;
+
+        // Lluvia de flores inicial
+        setInterval(() => {
+            const f = document.createElement('div');
+            f.className = 'flor-fondo'; f.innerHTML = '🌸';
+            f.style.left = Math.random() * 100 + 'vw';
+            f.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            f.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('capa-decorativa').appendChild(f);
+            setTimeout(() => f.remove(), 7000);
+        }, 500);
+
+        function agitar() {
+            const frasco = document.getElementById('frascoMaster');
+            const sobre = document.getElementById('sobreV');
+            const btn = document.getElementById('btnAccion');
+            btn.disabled = true;
+            frasco.classList.add('shake-frasco');
+            setTimeout(() => {
+                frasco.classList.remove('shake-frasco');
+                sobre.classList.add('volar-lado');
+            }, 1000);
+        }
+
+        function abrirCarta() {
+            const modal = document.getElementById('modalC');
+            const texto = document.getElementById('textoR');
+            texto.innerText = razones[contador % razones.length];
+            modal.style.display = 'flex';
+        }
+
+        function cerrarCarta() {
+            document.getElementById('modalC').style.display = 'none';
+            document.getElementById('sobreV').classList.remove('volar-lado');
+            contador++;
+            actualizarProgreso();
+            if (contador < total) {
+                document.getElementById('btnAccion').disabled = false;
+            } else {
+                lanzarFinal();
+            }
+        }
+
+        function actualizarProgreso() {
+            document.getElementById('contadorTexto').innerText = `${contador} / ${total} Razones`;
+            document.getElementById('progresoBarra').style.width = `${(contador / total) * 100}%`;
+        }
+
+        function lanzarFinal() {
+            document.getElementById('interfazPrincipal').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('interfazPrincipal').style.display = 'none';
+                document.getElementById('pantallaFinal').style.display = 'flex';
+                // Lluvia masiva de mariposas
+                for(let i=0; i<40; i++) {
+                    setTimeout(() => {
+                        const m = document.createElement('div');
+                        m.className = 'mariposa'; m.innerHTML = '🦋';
+                        m.style.left = '-50px'; m.style.top = Math.random() * 100 + 'vh';
+                        m.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                        document.body.appendChild(m);
+                    }, i * 150);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Canciones para el amor de mi vida ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-fuerte: #ff4d8d;
+            --rosa-brillante: #ff85b2;
+            --rosa-claro: #ffeef4;
+            --blanco: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: radial-gradient(circle at center, #fff0f6 0%, #ffcce6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--rosa-fuerte);
+            font-size: 3rem;
+            margin: 40px 0;
+            text-align: center;
+            text-shadow: 2px 2px 0px #fff;
+            z-index: 10;
+        }
+
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            padding-bottom: 40px;
+            z-index: 10;
+        }
+
+        .cancion-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 15px;
+            border: 3px solid white;
+            box-shadow: 0 10px 25px rgba(255, 92, 138, 0.15);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cancion-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--rosa-fuerte);
+            box-shadow: 0 15px 30px rgba(255, 77, 141, 0.3);
+        }
+
+        .media {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(135deg, var(--rosa-claro), #ffffff);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cancion-card h3 { margin: 10px 0 5px; color: #333; font-size: 1.1rem; font-weight: 700; }
+        .cancion-card p { margin: 0; color: var(--rosa-fuerte); font-weight: 600; font-size: 0.9rem; }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 204, 230, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            width: 85%; max-width: 500px;
+            padding: 35px;
+            border-radius: 35px;
+            text-align: center;
+            border: 6px solid var(--rosa-fuerte);
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .cerrar { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--rosa-brillante); }
+
+        .mensaje-texto {
+            font-size: 1rem; line-height: 1.6; color: #444;
+            margin: 20px 0; text-align: justify;
+            background: #fff9fb; padding: 15px; border-radius: 15px;
+        }
+
+        .btn-link {
+            background: linear-gradient(45deg, var(--rosa-fuerte), var(--rosa-brillante));
+            color: white; text-decoration: none; padding: 12px 25px;
+            border-radius: 50px; font-weight: 700; display: inline-block;
+        }
+
+        /* DECORACIÓN CAÍDA */
+        .deco-caida { position: fixed; top: -20px; pointer-events: none; opacity: 0.6; animation: caida linear infinite; z-index: 1; }
+        @keyframes caida { to { transform: translateY(105vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <script>
+        function abrir(t, a, m, l) {
+            document.getElementById('m-titulo').innerText = t;
+            document.getElementById('m-artista').innerText = a;
+            document.getElementById('m-texto').innerText = m;
+            document.getElementById('m-link').href = l;
+            document.getElementById('miModal').style.display = 'flex';
+        }
+        function cerrar() { document.getElementById('miModal').style.display = 'none'; }
+
+        // Flores y Estrellas cayendo
+        window.onload = () => {
+            const iconos = ["✿", "✨", "🌸", "⭐", "💕", "✨"];
+            for(let i=0; i<50; i++){
+                let f = document.createElement("div");
+                f.className = "deco-caida"; 
+                f.textContent = iconos[Math.floor(Math.random() * iconos.length)];
+                f.style.left = Math.random()*100+"vw";
+                f.style.animationDuration = 7+Math.random()*10+"s";
+                f.style.fontSize = 15+Math.random()*15+"px";
+                f.style.color = (i % 2 === 0) ? "#ff85b2" : "#ffcc00"; // Rosa y Dorado
+                document.body.appendChild(f);
+            }
+        }
+    </script>
+
+    <h1>✨ Playlist Para Mi Amor ✨</h1>
+
+    <div class="playlist-grid">
+        <div class="cancion-card" onclick="abrir('My One And Only Love', 'Mon Laferte', 'Esta canción te la he dedicado en repetitivas ocasiones debido a que así como dice la letra no hay razón para no amarte como yo te amo, es decir de una manera inmensa, con el sueño de seguir construyendo el futuro que hemos deseado y visualizado, ojala cada día ser mejores el uno para el otro, sanar heridas en base de nuestro amor que es irrepetible y perfeto a su manera; en mis planes esta cuidarte hasta el fin de mis días incluso en la eternidad donde cabe todo mi cariño por ti.', 'https://www.youtube.com/watch?v=lcoqOPaBe9M')">
+            <div class="media"><img src="cancion/my love my one andas only love.png" alt="1"></div>
+            <h3>My One And Only Love</h3>
+            <p>Mon Laferte</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Química Mayor', 'Mon Laferte', 'A tu lado siento una conexión irremplazable, sabes inmediatamente lo que siento, sabes lo que quiero, y yo de igual forma puedo sentir lo que yace de tu corazón, y eso es el efecto de estar enamorada de ti; se que toda la vida me sentiré igual de atrapada por tu esencia, mi sentimiento permanecerá innato como desde el primer día juntos, porque para mi eres perfecto, mi vida entera y mi admiración constante.', 'https://www.youtube.com/watch?v=e23BTGIJcq8')">
+            <div class="media"><img src="cancion/quimica mayor.png" alt="2"></div>
+            <h3>Química Mayor</h3>
+            <p>Mon Laferte</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Amor Completo', 'Mon Laferte', 'Gracias a tu existence mi jardín interno florece de manera frondosa, me alegras tanto el alma que veo todo con mas color, mis sentimientos hacia ti son intensos y a tu lado deseo vivir muchos mas momentos bellos y que queden escritos en nuestra historia eternamente, porque ya decide amarte por siempre.', 'https://www.youtube.com/watch?v=PQlG1gznMBE')">
+            <div class="media"><img src="cancion/amor completo.png" alt="3"></div>
+            <h3>Amor Completo</h3>
+            <p>Mon Laferte</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Miel', 'Lauri Garcia', 'Eres todo lo que he soñado en mi vida hecho en la realidad mas bonita, eres con quien quiero todo durante mi existence. Tienes los ojos mas hermosos que haya visto, aquellos que me derriten por completo, tan dulces como la miel, la sonrisa mas encantadora que me enloquece y me hechiza, y la piel tan suave y cálida, que parece un manto que me arrulla y de aquel no quiero salir.', 'https://www.youtube.com/watch?v=Y5cLnhGQECA')">
+            <div class="media"><img src="cancion/miel.jpg" alt="4"></div>
+            <h3>Miel</h3>
+            <p>Lauri Garcia</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Something about you', 'Eyedress', 'Es muy especial esta canción para mi, ya que describe con precisión como te visualizo, mi amor tan inmenso por ti y como disfruto hasta de lo mas casual contigo. Eres lo mas precioso que he visto, en cuanto a tu deslumbrante físico y aquel espíritu tan noble que posees y me cautiva. Quiero estar contigo mas allá de la muerte porque para mi eres eterno, siempre abra algo que me recuerde a ti, a tu belleza, y junto a ti vivir miles de experiencias brindándote mi cariño y apoyo hasta el fin de mis días.', 'https://www.youtube.com/watch?v=0VAAS9xnS5U')">
+            <div class="media"><img src="cancion/something about you.jpg" alt="5"></div>
+            <h3>Something about you</h3>
+            <p>Eyedress</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Lo Que Siento', 'Cuco', 'Esta canción con solo la melodía me hace pensarte, te imagino constantemente, eres mi recuerdo mas frecuente, y el motivo de mi sonrisa en cualquier instante, porque no puedo creer que exista alguien tan perfecto como tu, que te has robado mi corazon y le devuelves la calma a mi mente que te extraña todos los días, eres el tesoro al que quiero proteger y la inspiración para el arte, nunca te dejare solito porque te has vuelto mi mas grande adoración, y la única persona que logra alterar cada uno de mis sentidos.', 'https://www.youtube.com/watch?v=AjGkbFqi67c')">
+            <div class="media"><img src="cancion/lo que siento.jpg" alt="6"></div>
+            <h3>Lo Que Siento</h3>
+            <p>Cuco</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Amor De Siempre', 'Cuco', 'Te has vuelto en aquella luz que ilumina y me guía por la vida, lo que mas brilla en mi cielo, irrepetible, tan irreal. Cada te amo que proviene de tus dulces labios causa que mis ojos brillen y sienta que muero y vuelvo a revivir. Me derrito de amor por ti, eres mi debilidad mas hermosa, y cada instante contigo es como estar flotando en el universo, donde no existe el tiempo, somos solo tu y yo, rodeados de estrellas donde queda guardada cada experiencia juntos.', 'https://www.youtube.com/watch?v=ZyowJ5GB2Dk')">
+            <div class="media"><img src="cancion/amor de siempre.jpg" alt="7"></div>
+            <h3>Amor De Siempre</h3>
+            <p>Cuco</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Amtrak', 'Los Retros', 'Toma mi mano, confía en mi, solo tengo mucho amor por entregarte. Créeme que busco frecuentemente la forma de estar contigo, acompañándote a realizar tus sueños, y que la base de nuestro amor edifique junto a la confianza y lealtad nuestro proyecto de vida, aquel que solo tiene color si estas tu, aquel que solo tiene sentido si tu divina presencia forma parte. Porque tu revives mi niña interior, me inspiras muchos sueños y mantienes vivas mis ilusiones de vida.', 'https://www.youtube.com/watch?v=N-6ZE_1avDo')">
+            <div class="media"><img src="cancion/amtrak.jpg" alt="8"></div>
+            <h3>Amtrak</h3>
+            <p>Los Retros</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Labios Rotos', 'Zoé', 'Te voy a cuidar con todo mi amor, quiero ser parte de tu corazon benevolente y misericordioso, y sanar las fisuras pasadas. Deseo entregarte todo lo que emana de mi alma gracias a tu existence y a esa ternura que me irradias.', 'https://www.youtube.com/watch?v=7h2ryr_uUEs')">
+            <div class="media"><img src="cancion/labios rotos.webp" alt="9"></div>
+            <h3>Labios Rotos</h3>
+            <p>Zoé</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Via Lactea', 'Zoé', 'Te has grabado en mi alma, porque has marcado a mi vida permanentemente, llevo los recuerdos de nosotros donde voy, y se ilustran mientras duermo. Tu nombre para mi es sagrado, y eterno, porque eres protagonistas en cada historia que imagino y por quien daría mi vida entera, ya que ante mis ojos eres percibido como un individuo celestial.', 'https://www.youtube.com/watch?v=yHJ5VGCQ_0s')">
+            <div class="media"><img src="cancion/via lactea.webp" alt="10"></div>
+            <h3>Via Lactea</h3>
+            <p>Zoé</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Corazon Atomico', 'Zoé', 'Siento que mi corazon estallara de amor y felicidad, no me importa nadie mas que tu, cautivaste mi alma y la tienes encantada, mi amor por ti es creciente e infinito, es puro, sincero, genuino. Me has transformado para ser el proyecto de mujer ideal para ti y darte todo lo que florece de mi ser dirigido a ti, el amor de mi vida, mi complemento perfecto.', 'https://www.youtube.com/watch?v=ayBJ8PkW9jI')">
+            <div class="media"><img src="cancion/corazon atomico.jpg" alt="11"></div>
+            <h3>Corazon Atomico</h3>
+            <p>Zoé</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Rue Vieille Du Temple', 'Leon Larregui', 'Me haces ver la vida de forma distinta, con ojos de amor, siento todo mas real a tu lado, y aun si estuvieras lejos tu brillo me acercaría hacia ti, porque entre la multitud eres único y mi sol radiante, aquella marca eterna en mi alma y mi piel.', 'https://www.youtube.com/watch?v=62WV4tFEh0Q')">
+            <div class="media"><img src="cancion/nombre frances raro.webp" alt="12"></div>
+            <h3>Rue Vieille Du Temple</h3>
+            <p>Leon Larregui</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Locos', 'Leon Larregui', 'Estoy feliz de tenerte a mi lado, que me llenes de besitos y de todos nuestros apodos, amo con cada parte de mi ser nuestra relación y a ti, me derrite cada palabra tuya y me enamoras con cada accion, me encanta tu mirada tan profunda y preciosa que me da escalofríos, me encanta que te rías de mis malos chistes, definitivamente eres lo mas lindo en esta vida, y no puedo vivir sin ti. Te amo hasta el fin.', 'https://www.youtube.com/watch?v=riQLQI0MJZ0')">
+            <div class="media"><img src="cancion/locos.jpg" alt="13"></div>
+            <h3>Locos</h3>
+            <p>Leon Larregui</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Contigo', 'Carla Morrison', 'Mi alma estaba buscando a la tuya, y ahora que te encontré deseo cuidarte, amarte, darte todo de mi. Eres una esencia brillante que posee características que amo, que a pesar de los problemas, mi prioridad es escucharte, conectar a profundidad contigo, eres mi luna en un cielo lleno de estrellas, aquella luna que me hizo compañía en los momentos que mas lo necesitaba, me dio aliento para seguir adelante, la luz de mis ojos, y mi pieza correcta, mi otra mitad.', 'https://www.youtube.com/watch?v=ZPb6rdS1ry0')">
+            <div class="media"><img src="cancion/contigo.jpg" alt="14"></div>
+            <h3>Contigo</h3>
+            <p>Carla Morrison</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Compartir', 'Carla Morrison', 'Quiero compartir mi vida contigo, me devuelves el aire y la paz con solo escuchar tu voz, detienes mi corazon cuando tus ojos miran los míos, me dejas sin palabras de lo maravilloso que eres, y tu aroma es mi fragancia preferida porque vivo para compartir mi amor contigo, vivo para compartir experiencias a tu lado.', 'https://www.youtube.com/watch?v=IPiA2ljRhvo')">
+            <div class="media"><img src="cancion/compartir.jpg" alt="15"></div>
+            <h3>Compartir</h3>
+            <p>Carla Morrison</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Buttercup', 'Jack Stauber', 'Electrifícame de amor así como ya lo haces, que me encanta la manera en la que alteras mis sentidos y como siento electricidad que me eriza y me mantiene alegre, eso lo causa tu manera de amarme.', 'https://www.youtube.com/watch?v=e2qG5uwDCW4')">
+            <div class="media"><img src="cancion/buttercup.webp" alt="16"></div>
+            <h3>Buttercup</h3>
+            <p>Jack Stauber</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Dumb Heart', 'Jack Stauber', 'Té dedico una parte en la cual se plasma exactamente como quiero darte todo lo que mereces, muchas veces no lo consigo, sin embargo mi vida te amo como no te imaginas e intento con todas mis fuerzas demostrarte mi cariño incondicional.', 'https://www.youtube.com/watch?v=FNgX7_sm_dM')">
+            <div class="media"><img src="cancion/dumb heart.webp" alt="17"></div>
+            <h3>Dumb Heart</h3>
+            <p>Jack Stauber</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Enamorado Tuyo', 'Cuarteto de Nos', 'Claramente de esta canción podemos concluir que es obvio que estoy enamorada de ti, y ese sentimiento crece cada día mas con locura y ahora ya no me importa admitir que me derrito de amor por ti, y lo que antes no podía explicar con palabras lo hacia con ataques de amor incluso hasta ahora porque has puesto mi mundo de cabeza.', 'https://www.youtube.com/watch?v=R5cbxTPZNL0')">
+            <div class="media"><img src="cancion/enamorado tuyo.jpg" alt="18"></div>
+            <h3>Enamorado Tuyo</h3>
+            <p>Cuarteto de Nos</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('I Was Made For Lovin You', 'Kiss', 'Estoy hecha para amarte con todo mi ser, porque yo soy para ti y tu eres perfecto para mi; en lo absoluto no podría cansarme de ti y realmente me gustaria dartelo todo.', 'https://www.youtube.com/watch?v=ZhIsAZO5gl0')">
+            <div class="media"><img src="cancion/i was made fo.jpg" alt="19"></div>
+            <h3>I Was Made For Lovin' You</h3>
+            <p>Kiss</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Eres', 'Café Tacvba', 'Eres en quien quiero invertir todo mi tiempo, cumplirte todas mis promesas. Estar contigo en las subidas y bajadas, y aun así nunca cambiara mi sentimiento, porque disfruto plenamente de tu compañía y tu amor es mi fuerza para cumplir todos mis objetivos que son fuente de todo lo que te propuesto con sinceridad.', 'https://www.youtube.com/watch?v=RiDMRwR-GQY')">
+            <div class="media"><img src="cancion/eres.jpg" alt="20"></div>
+            <h3>Eres</h3>
+            <p>Café Tacvba</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('All My Loving', 'The Beatles', 'En los momentos que no estoy contigo esta canción me hace pensar en ti, porque como dice si no estoy presente es porque escribo tal vez un poema para ti, o una manualidad que representa todo mi amor pero claro siempre extrañando tus besos, tu presencia y caricias. Y como base del amor la lealtad incondicional hacia ti que eres mi único amor de vida.', 'https://www.youtube.com/watch?v=TSpiwK5fig0')">
+            <div class="media"><img src="cancion/all my loving.jpg" alt="21"></div>
+            <h3>All My Loving</h3>
+            <p>The Beatles</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Entre Caníbales', 'Soda Stereo', 'En la letra se describe mi entrega total hacia ti, puedes tomar lo que quieras de mi.', 'https://www.youtube.com/watch?v=4OvhrzXu4Yo')">
+            <div class="media"><img src="cancion/entre canibales.jpg" alt="22"></div>
+            <h3>Entre Caníbales</h3>
+            <p>Soda Stereo</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Viento', 'Caifanes', 'Me gustaria que el tiempo pase mucho mas lento y se detenga cuando estoy contigo, porque a tu lado vivo realmente de manera intensa, que el viento nos amarre, y cada instante contigo sea una vida entera porque quiero vivir solo a tu lado.', 'https://www.youtube.com/watch?v=T8TtE-enslA')">
+            <div class="media"><img src="cancion/viento.jpg" alt="23"></div>
+            <h3>Viento</h3>
+            <p>Caifanes</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Frances Limón', 'Enanitos Verdes', 'Con solo verte me di cuenta para que había nacido, así estuvieras del otro lado del mundo, te buscaría nadando y eso que no se nadar, sin embargo por ti vale la pena intentarlo todo, a tu saldo siento que todo es muy romántico y lindo, y las noches brillan mas de lo normal porque la iluminan tus bellos ojos.', 'https://www.youtube.com/watch?v=jIwX3YozFQ4')">
+            <div class="media"><img src="cancion/frances limon.jpg" alt="24"></div>
+            <h3>Frances Limón</h3>
+            <p>Enanitos Verdes</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Luv(sic) feat.Shing02', 'Nujabes', 'Esta canción tiene de contenido todas las palabras que te he dicho, es una forma de hablar sobre el amor elocuentemente, a un nivel trascendental que estoy segura que entenderás, es un poema que te dedico porque básicamente nuestras almas encuentran afinidad mutuamente y no es algo relativo, ni casualidad es el effecto de que mi espíritu te ha estado por demasiado tiempo, simplemente lo hemos olvidado, sin embargo el amor es inolvidable, porque eres mi inspiración constante la fuente de mi paz y armonía.', 'https://www.youtube.com/watch?v=6pQBIYC9nZc')">
+            <div class="media"><img src="cancion/luv 02.jpg" alt="25"></div>
+            <h3>Luv(sic)</h3>
+            <p>Nujabes</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Tu si sabes quererme', 'Natalia Lafourcade', 'Me encanta la manera en la que me amas, es irrepetible, a pesar de los problemas me eres muy leal y no tienes miedo de demostrarme todo tu cariño, y te lo agradezco, es de los mejores regalos y soy muy afortunada al tener un amor tan genuino en mi vida como lo eres tu, y créeme que mi mayor placer es corresponderte el doble.', 'https://www.youtube.com/watch?v=ks9o4Ax3Pq4')">
+            <div class="media"><img src="cancion/tu si sabes quererme.jpg" alt="26"></div>
+            <h3>Tu si sabes quererme</h3>
+            <p>Natalia Lafourcade</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Amor De Mis Amores', 'Natalia Lafourcade', 'Ya sabes que eres mi vida, y no quiero a nadie mas que a ti. Eres el cielo azul, el sol radiante en mi mundo. En conclusión eres mi gran amor, único, hecho a la medida. Posees todo lo que soñado y solo me queda agradecerte, eres increíble y de verdad tenerte es el tesoro mas valioso. Eres el amor de mis amores.', 'https://www.youtube.com/watch?v=otP2HT5m9GI')">
+            <div class="media"><img src="cancion/amor de mis amores.jpg" alt="27"></div>
+            <h3>Amor De Mis Amores</h3>
+            <p>Natalia Lafourcade</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Soñé', 'Zoé', 'Todos los paisajes mas hermosos que he visualizado no se comparan a la magnitud de tu físico ni a la tranquilidad que me brinda tu solemne espíritu.', 'https://www.youtube.com/watch?v=HJqlA_HTEU8')">
+            <div class="media"><img src="cancion/soñe.jpg" alt="28"></div>
+            <h3>Soñé</h3>
+            <p>Zoé</p>
+        </div>
+
+        <div class="cancion-card" onclick="abrir('Arrullo De Estrellas', 'Zoé', 'Ocupas un lugar especial en el consiente y subconsciente de mi alma , como te he dicho, eres mi angelito de la guarda y estoy plena de tenerte, serás mi amor eterno para siempre así yo parta de este mundo, estaré toda la vida orgullosa de ti, de todo lo que has logrado, del gran ser humano que eres, que no importa la distancia, mi espíritu siempre estará pendiente a ti y a tus logros. Nunca olvides que vales demasiado mereces todo el amor de este mundo y no estas solito, y eres demasiado importante en este universo.', 'https://www.youtube.com/watch?v=WJmm32hgtLQ')">
+            <div class="media"><img src="cancion/arrullo de estrellas.jpg" alt="29"></div>
+            <h3>Arrullo De Estrellas</h3>
+            <p>Zoé</p>
+        </div>
+    </div>
+
+    <div style="margin: 30px 0 80px 0; text-align: center; z-index: 10; position: relative;">
+        <a href="galeria.html" style="font-family: 'Pacifico', cursive; background: linear-gradient(45deg, #ff4d8d, #ff85b2); color: white; text-decoration: none; padding: 18px 45px; border-radius: 50px; font-size: 1.8rem; border: 5px solid white; box-shadow: 0 10px 25px rgba(255, 77, 141, 0.4); transition: all 0.3s ease; display: inline-block;" onmouseover="this.style.transform='scale(1.1) rotate(-2deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'">
+            📸 Nuestros Recuerdos 📸
+        </a>
+    </div>
+
+    <div class="modal" id="miModal">
+        <div class="modal-content">
+            <span class="cerrar" onclick="cerrar()">&times;</span>
+            <h2 id="m-titulo" style="font-family:'Pacifico'; color:var(--rosa-fuerte); margin-bottom:5px;"></h2>
+            <h4 id="m-artista" style="color:#888; margin-top:0;"></h4>
+            <div class="mensaje-texto" id="m-texto"></div>
+            <a href="#" id="m-link" target="_blank" class="btn-link">🎵 Escuchar en YouTube</a>
+        </div>
+    </div>
+
+</body>
+</html>

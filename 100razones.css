@@ -1,0 +1,324 @@
+/* --- CONFIGURACIÓN DE COLORES Y FUENTES --- */
+:root {
+    --rosa-fuerte: #ff4d8d;
+    --rosa-brillante: #ff85b2;
+    --rosa-claro: #ffb6c1;
+    --rosa-pastel: #fff0f5;
+    --blanco-cristal: rgba(255, 255, 255, 0.3);
+    --sombra-amor: rgba(255, 77, 141, 0.4);
+    --sombra-polaroid: rgba(0, 0, 0, 0.15);
+}
+
+/* --- RESET GENERAL --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
+    background: radial-gradient(circle, #fff5f8 0%, #ffe4ec 100%);
+}
+
+/* --- CAPA DE RELLENO VISUAL (FLORES) --- */
+#capa-decorativa {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.flor-fondo {
+    position: absolute;
+    top: -100px;
+    opacity: 0.4;
+    z-index: 2;
+    pointer-events: none;
+    animation: lluvia-lenta linear forwards;
+}
+
+@keyframes lluvia-lenta {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* --- CONTADOR DE CORAZONES (TOP) --- */
+.contador-contenedor {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 40px;
+    border-radius: 50px;
+    box-shadow: 0 15px 35px var(--sombra-amor);
+    font-family: 'Pacifico', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    border: 2px solid var(--rosa-claro);
+}
+
+#contadorTexto {
+    color: var(--rosa-fuerte);
+    font-size: 1.2rem;
+}
+
+.barra-progreso {
+    width: 180px;
+    height: 12px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+#progresoBarra {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--rosa-brillante), var(--rosa-fuerte));
+    transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- INTERFAZ DEL FRASCO GIGANTE --- */
+.contenedor-magico {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    transition: opacity 1s ease-in-out;
+}
+
+.escena-frasco {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    perspective: 1200px;
+}
+
+.frasco-cristal {
+    width: 100%;
+    height: 100%;
+    background: var(--blanco-cristal);
+    border: 6px solid #fff;
+    border-radius: 60px 60px 130px 130px;
+    position: relative;
+    backdrop-filter: blur(15px);
+    box-shadow: 
+        0 40px 80px var(--sombra-amor), 
+        inset 0 0 60px rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tapa {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 210px;
+    height: 55px;
+    background: var(--rosa-fuerte);
+    border: 4px solid #fff;
+    border-radius: 20px;
+    z-index: 5;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.etiqueta {
+    background: #fff;
+    padding: 25px;
+    border: 3px dashed var(--rosa-fuerte);
+    border-radius: 10px;
+    font-family: 'Pacifico', cursive;
+    color: var(--rosa-fuerte);
+    text-align: center;
+    transform: rotate(-2deg);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    font-size: 1.8rem;
+    line-height: 1.2;
+}
+
+/* --- BOTÓN AGITAR (ESTILO ANIVERSARIO) --- */
+.btn-agitar {
+    margin-top: 60px;
+    padding: 22px 80px;
+    background: linear-gradient(45deg, var(--rosa-fuerte), var(--rosa-brillante));
+    color: white;
+    border: none;
+    border-radius: 70px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8rem;
+    cursor: pointer;
+    box-shadow: 0 20px 45px var(--sombra-amor);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-agitar:hover:not(:disabled) {
+    transform: scale(1.1) translateY(-10px);
+    filter: brightness(1.1);
+}
+
+.btn-agitar:disabled {
+    filter: grayscale(0.6);
+    opacity: 0.7;
+    transform: scale(0.95);
+}
+
+/* --- ANIMACIONES DE ACCIÓN --- */
+.shake-frasco {
+    animation: shaking 0.1s infinite;
+}
+
+@keyframes shaking {
+    0%, 100% { transform: translate(0, 0) rotate(0); }
+    25% { transform: translate(12px, 12px) rotate(3deg); }
+    75% { transform: translate(-12px, -6px) rotate(-3deg); }
+}
+
+.sobre-animado {
+    position: absolute;
+    display: none;
+    font-size: 6.5rem;
+    cursor: pointer;
+    z-index: 100;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.25));
+}
+
+.volar-lado {
+    display: block;
+    animation: trayectoriaLateral 1.6s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes trayectoriaLateral {
+    0% { transform: scale(0) translate(0, 0) rotate(0); opacity: 0; }
+    20% { opacity: 1; }
+    60% { transform: scale(1.8) translate(300px, -240px) rotate(360deg); }
+    100% { transform: scale(1.6) translate(260px, -200px) rotate(360deg); }
+}
+
+/* --- MODAL DE LA CARTA (TERNURA) --- */
+.modal-carta {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: rgba(255, 182, 193, 0.25);
+    backdrop-filter: blur(15px);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+}
+
+.hoja-tierna {
+    background: #fff;
+    width: 90%;
+    max-width: 440px;
+    padding: 60px;
+    border-radius: 45px;
+    box-shadow: 0 45px 110px var(--sombra-amor);
+    text-align: center;
+    border: 2px solid var(--rosa-pastel);
+    animation: brotar 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes brotar {
+    from { transform: scale(0.5) translateY(100px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* --- ESTILO DE LA PANTALLA FINAL --- */
+.gran-final {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, #ffffff 0%, #ffc0cb 100%);
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.foto-polaroid {
+    background: white;
+    padding: 20px 20px 65px 20px;
+    box-shadow: 0 35px 75px var(--sombra-polaroid);
+    transform: rotate(-3deg);
+    border-radius: 4px;
+    max-width: 380px;
+    margin-bottom: 30px;
+    transition: 0.5s;
+}
+
+.foto-polaroid:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.foto-polaroid img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+.dedicatoria h2 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--rosa-fuerte);
+    font-size: 2.2rem;
+    margin: 20px 0 5px 0;
+}
+
+.dedicatoria p {
+    font-family: 'Quicksand', sans-serif;
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* --- MARIPOSAS VOLANDO --- */
+.mariposa {
+    position: fixed;
+    font-size: 2.5rem;
+    pointer-events: none;
+    z-index: 1001;
+    animation: volarM 6s linear infinite;
+}
+
+@keyframes volarM {
+    0% { transform: translate(-10vw, 100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translate(110vw, -15vh) rotate(360deg); }
+}
+
+/* --- BOTÓN SIGUIENTE --- */
+.btn-siguiente {
+    margin-top: 20px;
+    padding: 18px 50px;
+    background: var(--rosa-fuerte);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3rem;
+    box-shadow: 0 10px 25px var(--sombra-amor);
+    animation: latido 2s infinite;
+}
+
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); box-shadow: 0 15px 30px var(--sombra-amor); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
